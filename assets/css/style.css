@@ -1,0 +1,37 @@
+
+
+.game{
+    border:1pt solid black;
+    margin-top:5px;
+    border-radius: 5px;
+}
+
+.user-items{
+    margin:5px;
+    border-radius: 10px;
+}
+
+.main-title{
+    font-size:48pt;
+    border: 1pt solid black;
+}
+
+.left-container{
+    border:1pt solid black;
+    margin-top:5px;
+}
+
+.main-container{
+    border:1pt solid black;
+    margin-top:5px;
+}
+
+#upcoming-games{
+    padding-left: 30px;
+    padding-right:30px; 
+}
+
+#game-in-progess{
+    font-size:30pt;
+    border:1pt solid black;
+}
