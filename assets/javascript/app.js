@@ -1,4 +1,4 @@
-
+var premierTeams = [];
 
 
 $(document).ready(function() {
@@ -21,8 +21,8 @@ var database = firebase.database();
 var auth = firebase.auth();
 
 
+    // Calls the sportDB api to get the upcoming 15 premier league matches 
     var queryURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4328"
-
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -38,5 +38,16 @@ var auth = firebase.auth();
         }
     });
 
+    //Calls the sportDB api to get all the teams in the premier league 
+    var queryURL2 = "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=English%20Premier%20League"
+    $.ajax({
+        url: queryURL2,
+        method: "GET"
+    }) .then(function(response2) {
+        for(var j=0;j<20;j++){
+            premierTeams.push(response2.teams[j].strTeam);
+        }
+        console.log(premierTeams);
+    });
 
 });
