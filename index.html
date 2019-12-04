@@ -35,91 +35,91 @@
     </div>
     <div class="row">
         <div class = "col-md-12">
-          <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLogin">
-            Login
-        </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalLogin">
+                Login
+            </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modelTitle">Login Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modelTitle">Login Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="userLoginForm">
+                                <div class="form-group">
+                                    <label for="inputEmail">Email address</label>
+                                    <input type="email" class="form-control" id="userInputEmail"></input>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" class="form-control" id="userInputPassword"></input>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="userSubmit">Submit</button>
+                            </form>
+                        </div>
+
                     </div>
-                    <div class="modal-body">
-                        <form id="userLoginForm">
-                            <div class="form-group">
-                                <label for="inputEmail">Email address</label>
-                                <input type="email" class="form-control" id="userInputEmail"></input>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword">Password</label>
-                                <input type="password" class="form-control" id="userInputPassword"></input>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" id="userSubmit">Submit</button>
-                        </form>
-                    </div>
-
                 </div>
             </div>
-        </div>
 
 
-           <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" id="logoutB">
-            Logout
-        </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary buttons-main" id="logoutB">
+                Logout
+            </button>
 
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalA">
-            New user
-        </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalA">
+                New user
+            </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title-A" id="modelTitleA">New User Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title-A" id="modelTitleA">New User Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-bodyA">
+
+                            <form id="newUserInputForm">
+                                <div class="form-group">
+                                    <label for="newUserInputFirstName">First Name</label>
+                                    <input type="text" class="form-control" id="newUserInputFirstNameA"></input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="newUserInputEmail">Email address</label>
+                                    <input type="email" class="form-control" id="newUserInputEmailA"></input>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="newUserInputPassword">Password</label>
+                                    <input type="password" class="form-control" id="newUserInputPasswordA"></input>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="newUserSubmit">Submit</button>
+                            </form>
+                        </div>
+
                     </div>
-                    <div class="modal-bodyA">
-
-                        <form id="newUserInputForm">
-                            <div class="form-group">
-                                <label for="newUserInputFirstName">First Name</label>
-                                <input type="text" class="form-control" id="newUserInputFirstNameA"></input>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="newUserInputEmail">Email address</label>
-                                <input type="email" class="form-control" id="newUserInputEmailA"></input>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="newUserInputPassword">Password</label>
-                                <input type="password" class="form-control" id="newUserInputPasswordA"></input>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" id="newUserSubmit">Submit</button>
-                        </form>
-                    </div>
-
                 </div>
             </div>
-        </div>
 
         </div>
     </div>
@@ -131,15 +131,58 @@
 
     <div class = "row">
         <div class="col-md-3 left-container">
-  <div id="time"></div>
-    <div id="time2"></div>
-
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 text-center">
+                    <div id="time"></div>
+                    <div id="time2"></div>
+                </div>
+                <div class="col-md-1"></div>      
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 text-center">
+                    <span>Favorite Team:</span>
+                    <select id="team-dropdown"></select>
+                </div>
+                <div class="col-md-1"></div> 
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 text-center">
+                    <span class="lbl-standings">Premier League Standings</span>
+                    <table id="premiere-standings" class="text-center">
+                        <tr class = "table-labels">
+                            <th>Team</th>
+                            <th>GP</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>P</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-1"></div> 
+            </div>
         </div>
         <div class="col-md-7 main-container text-center">
+            <div class="row">
+                <div class="col-md-2 text-center">
+                    <select id="team-select"></select>
+                </div>
+                <div class="col-md-10 text-center">
+                    <p class="lbl-match">Last Five Match Results</p>
+                </div>
+            </div>
+            <div class="row">
+                <div id="hist-results"class="text-center col-md-12">
 
+                </div>
+            </div>
         </div>
         <div id="upcoming-games"class="col-md-2 text-center right-container">
-            
+            <br>
+            <span class="lbl-upcoming">Upcoming Games</span>
         </div>
     </div>
 

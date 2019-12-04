@@ -1,13 +1,25 @@
+td{
+    border-bottom:1pt solid black;
+    padding-bottom:3px;
+}
 
-
+.buttons-main{
+    margin:5px;
+    border-radius: 5px;
+    float:right;
+}
 .game{
     border:1pt solid black;
     margin-top:5px;
     border-radius: 5px;
+    line-height: 30%;
+    padding-top:15px;
+    font-size:10pt;
+    font-weight: bold;
 }
 
 .user-items{
-    margin:5px;
+    margin:7px;
     border-radius: 10px;
 }
 
@@ -26,12 +38,68 @@
     margin-top:5px;
 }
 
+.table-labels{
+    background-color:gray;
+}
+
+.lbl-match{
+    margin-top:15px;
+    font-size: 18pt;
+    margin-left:-60px;
+}
+
+.hist-games{
+    border-radius:5px;
+    border:1pt solid black;
+    line-height: 70%;
+    padding-top:15px;
+    margin:5px;
+    width:18%;
+    float:left;
+}
+
+.game-teams{
+    font-size:10pt;
+}
+
+.game-details{
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+.game-results{
+    font-size:14pt;
+    font-weight: bolder;
+}
+
 #upcoming-games{
     padding-left: 30px;
     padding-right:30px; 
+}
+
+#hist-results{
+    border:1pt solid black;
+    padding-left:70px;
 }
 
 #game-in-progess{
     font-size:30pt;
     border:1pt solid black;
 }
+
+#team-dropdown{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+#premiere-standings{
+    margin-top:5px;
+    border: 1pt solid black;
+    width: 100%;
+}
+
+#team-select{
+    margin-top:10px;
+}
+
+

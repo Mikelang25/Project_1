@@ -161,36 +161,118 @@ database.ref().on("child_added", function (childSnapshot) {
 
 
 
+//Mike Begin 
+
+// Calls the sportDB api to get the upcoming 15 premier league matches 
+var queryURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4328"
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}) .then(function(response) {
+   
+    for(var i=0; i < 15; i++){
+        var convertedTime = moment(response.events[i].strTime,"HH:mm").format("hh:mm a");
+        var newGame = $("<div>").addClass("game")
+        var teams = $("<p>").text(response.events[i].strEvent);
+        var gameTime = $("<p>").text(response.events[i].dateEvent + " at " + convertedTime);
+        newGame.append(teams,gameTime);
+        
+        $("#upcoming-games").append(newGame);
+    }
+});
+
+//Calls the sportDB api to get all the teams in the premier league 
+var queryURL2 = "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=English%20Premier%20League"
+$.ajax({
+    url: queryURL2,
+    method: "GET"
+}) .then(function(response2) {
+    for(var j=0;j<20;j++){
+        var newTeam = {
+            teamName: response2.teams[j].strTeam,
+            teamId: response2.teams[j].idTeam
+        }
+        premierTeams.push(newTeam);
+
+        //Takes the current team and id and creates the favorite team dropdown that the user will be able to select 
+        var newOption = $("<option>").text(response2.teams[j].strTeam).attr("teamID",response2.teams[j].idTeam)
+        var newOption2 = $("<option>").text(response2.teams[j].strTeam).attr("id",response2.teams[j].idTeam)
+        $("#team-dropdown").append(newOption);
+        $("#team-select").append(newOption2);
+    }
+});
 
 
-    // Calls the sportDB api to get the upcoming 15 premier league matches 
-    var queryURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4328"
+function leagueInfo(){
+    //Calls the sportDB api to get all team details of premier league seasons 
+    var queryURL3 = "https://www.thesportsdb.com/api/v1/json/1/search_all_seasons.php?id=4328"
     $.ajax({
-        url: queryURL,
+        url: queryURL3,
         method: "GET"
-    }) .then(function(response) {
-        console.log(response);
-        for(var i=0; i < 15; i++){
-           var newGame = $("<div>").addClass("game")
-           var teams = $("<p>").text(response.events[i].strEvent);
-           var gameTime = $("<p>").text(response.events[i].dateEvent + " at " + response.events[i].strTime);
-            newGame.append(teams,gameTime);
-           
-           $("#upcoming-games").append(newGame);
+    }) .then(function(response3) {
+            var currentSeason = response3.seasons.length - 1
+            var queryURL4 = "https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4328&s=" + response3.seasons[currentSeason].strSeason
+            $.ajax({
+                url: queryURL4,
+                method: "GET"
+            }) .then(function(response4) {
+                    console.log(response4);
+                for(var k=0; k<response4.table.length;k++){
+                    var tableTeam = response4.table[k].name;
+                    var tableGP = response4.table[k].played;
+                    var tableWins = response4.table[k].win;
+                    var tableDraws = response4.table[k].draw;
+                    var tableLosses = response4.table[k].loss;
+                    var tablePoints = response4.table[k].total;
+
+                    var tableItem = $("<tr>").append(
+                        $("<td>").text(response4.table[k].name),
+                        $("<td>").text(response4.table[k].played),
+                        $("<td>").text(response4.table[k].win),
+                        $("<td>").text(response4.table[k].draw),
+                        $("<td>").text(response4.table[k].loss),
+                        $("<td>").text(response4.table[k].total)                        
+                    )
+                    $("#premiere-standings").append(tableItem);
+                }
+                    
+            });
+    });
+}
+leagueInfo();
+
+
+function teamResults(teamID){
+    //Calls the sportDB api to get all team details of premier league seasons 
+    var queryURL5 = "https://www.thesportsdb.com/api/v1/json/1/eventslast.php?id=" + teamID
+    $.ajax({
+        url: queryURL5,
+        method: "GET"
+    }) .then(function(response5) {
+        console.log(response5)
+        for(var l=0; l<response5.results.length;l++){
+            var gameMatch = $("<div>").addClass("hist-games");
+            var gameTeams = $("<p>").text(response5.results[l].strEvent).addClass("game-teams");
+            var gameLeague = $("<p>").text(response5.results[l].strLeague).addClass("game-details");
+            var gameResults = $("<p>").text(response5.results[l].intHomeScore + " - " + response5.results[l].intAwayScore).addClass("game-results");
+            gameMatch.append(gameTeams,gameLeague,gameResults);
+            $("#hist-results").append(gameMatch);
         }
     });
+}
 
-    //Calls the sportDB api to get all the teams in the premier league 
-    var queryURL2 = "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=English%20Premier%20League"
-    $.ajax({
-        url: queryURL2,
-        method: "GET"
-    }) .then(function(response2) {
-        for(var j=0;j<20;j++){
-            premierTeams.push(response2.teams[j].strTeam);
-        }
-        console.log(premierTeams);
-    });
+//This will empty the historical results div and make another call for the last 5 match results for the chosen team
+$("#team-select").on('change',function(){
+    $("#hist-results").empty();
+    var getValue=$(this).find('option:selected').attr('id');
+    teamResults(getValue);
+  });
+
+teamResults("133604");
+
+//Mike End 
+
+    
  //current London date and time function shown in html
  function currentTime() {
     var current = moment().tz('Europe/London').format('MMMM Do YYYY, h:mm:ss A');
