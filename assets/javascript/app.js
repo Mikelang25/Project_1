@@ -7,6 +7,7 @@ var firebaseConfig;
 var database;
 var selectedTeam;
 var selectedUserTeam;
+var userEmailForLogin;
 
 $(document).ready(function() {
 // Firebase configuration
@@ -30,11 +31,13 @@ var auth = firebase.auth();
  auth.onAuthStateChanged(user => {
     if (user) {
         console.log(user);
+        $("#user-logged-in").text("Welcome: " + user.displayName);
         $("#currentUserDetails").empty();
         $("#currentUserDetails").append("First Name: " + user.displayName + "<br>");
         $("#currentUserDetails").append("Email: " + user.email);
     }
     else {
+
         console.log("user logged out");
     }
 
@@ -43,22 +46,22 @@ var auth = firebase.auth();
 $("#userLoginForm").submit(function (event) {
     event.preventDefault();
 
-    var userEmailForLogin = $("#userInputEmail").val().trim();
+    userEmailForLogin = $("#userInputEmail").val().trim();
     var userPasswordForLogin = $("#userInputPassword").val().trim();
 
     console.log(userEmailForLogin);
     console.log(userPasswordForLogin);
-    // $("#exampleModalLogin").modal("hide");
-    // $("#userInputEmail").val("");
-    // $("#userInputPassword").val("");
+    $("#exampleModalLogin").modal("hide");
+    $("#userInputEmail").val("");
+    $("#userInputPassword").val("");
     auth.signInWithEmailAndPassword(userEmailForLogin, userPasswordForLogin).then(cred => {
 
         var user = firebase.auth().currentUser;
         $("#currentUserDetails").append("First Name: " + user.displayName + "<br>");
         $("#currentUserDetails").append("Email: " + user.email);
-
-
+        
     })
+    return userEmailForLogin;
 
 });
 //logout user
@@ -82,9 +85,9 @@ $("#newUserInputForm").submit(function (event) {
     console.log(newUserFirstNameSubmitted);
     console.log(newUserEmailSubmitted);
     console.log(newUserPasswordSubmitted);
-    // $("#exampleModalA").modal("hide");
-    // $("#newUserInputFirstNameA").val("");
-    // $("#newUserInputPasswordA").val("");
+    $("#exampleModalA").modal("hide");
+    $("#newUserInputFirstNameA").val("");
+    $("#newUserInputPasswordA").val("");
 
     // $("#extraDiv").append(newUserEmailSubmitted);
     // $("#extraDiv2").append(newUserPasswordSubmitted);
@@ -132,10 +135,9 @@ var userMessage = "";
 
 
 // Capture Button Click
-$("#submitButtonForMessage").on("click", function (event) {
-    event.preventDefault();
-
-    userMessage = $("#userMessage1").val().trim();
+$("#btn-sub-msg").on("click", function (event) {
+    var user = firebase.auth().currentUser;
+    userMessage = user.displayName + " : " + $("#userMessage1").val().trim();
     console.log(userMessage);
 
     //Code for the push
@@ -144,6 +146,8 @@ $("#submitButtonForMessage").on("click", function (event) {
         message: userMessage,
 
     });
+
+    $("#userMessage1").val("")
 });
 
 //add user messages from user from firebase to html
@@ -152,7 +156,8 @@ database.ref().on("child_added", function (childSnapshot) {
     // Log everything that's coming out of snapshot
     console.log(childSnapshot.val().message);
     // Change the HTML to reflect
-    $("#recentMember").prepend(childSnapshot.val().message);
+    var newMessage = $("<p>").text(childSnapshot.val().message);
+    $("#chat-content").append(newMessage);
 
     // Handle the errors
 }, function (errorObject) {

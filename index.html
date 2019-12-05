@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
@@ -98,7 +99,7 @@
 
                             <form id="newUserInputForm">
                                 <div class="form-group">
-                                    <label for="newUserInputFirstName">First Name</label>
+                                    <label for="newUserInputFirstName">Screen Name</label>
                                     <input type="text" class="form-control" id="newUserInputFirstNameA"></input>
                                 </div>
 
@@ -142,8 +143,7 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10 text-center">
-                    <span>Favorite Team:</span>
-                    <select id="team-dropdown"></select>
+                    <span id="user-logged-in"></span>
                 </div>
                 <div class="col-md-1"></div> 
             </div>
@@ -179,6 +179,42 @@
 
                 </div>
             </div>
+            <div class = "row">
+                <div class="col-md-7"></div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12 messages-title text-center">
+                            <span class="lbl-msg">Message Board</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 chat-main">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div id = "chat-content" class="col-md-10 messages-main text-left">
+
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10 messages-input">
+                                    <div class="form-group">
+                                        <label for="userMessage1"></label>
+                                        <textarea id="userMessage1" class="input-msg" type = "text" name="subject" placeholder="Leave a message!"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <input id="btn-sub-msg"type="submit" name="submit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="upcoming-games"class="col-md-2 text-center right-container">
             <br>
@@ -191,7 +227,7 @@
  </body>
 <script src="https://cdn.jsdelivr.net/momentjs/2.18.1/moment.min.js"></script>
 <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 <script src="assets/javascript/app.js"></script>
 
 

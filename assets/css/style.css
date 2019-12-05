@@ -72,6 +72,33 @@ td{
     font-weight: bolder;
 }
 
+.messages-title{
+    border-left:1pt solid black;
+}
+
+.chat-main{
+    border-left:1pt solid black;
+    border-bottom:1pt solid black;
+    height:725px;
+}
+
+.messages-main{
+    margin-top:10px;
+    margin-bottom:10px;
+    border:1pt solid black;
+    height:500px;
+}
+
+.messages-input{
+    border:1pt solid black;
+    height:150px;
+}
+
+.lbl-msg{
+    margin-top:15px;
+    font-size:18pt;
+}
+
 #upcoming-games{
     padding-left: 30px;
     padding-right:30px; 
@@ -100,6 +127,16 @@ td{
 
 #team-select{
     margin-top:10px;
+}
+
+#userMessage1{
+    height:100px;
+    width:100%;
+}
+
+#btn-sub-msg{
+   margin-top:10px; 
+   border-radius: 5px;
 }
 
 
