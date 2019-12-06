@@ -31,13 +31,18 @@ var auth = firebase.auth();
  auth.onAuthStateChanged(user => {
     if (user) {
         console.log(user);
-        $("#user-logged-in").text("Welcome: " + user.displayName);
+
+        $("#btn-sub-msg").show();
+        $("#chat-content").css("background-color","white")
+        $("#user-logged-in").text("Welcome!  " + user.displayName);
         $("#currentUserDetails").empty();
         $("#currentUserDetails").append("First Name: " + user.displayName + "<br>");
         $("#currentUserDetails").append("Email: " + user.email);
     }
     else {
-
+        $("#chat-content").css("background-color","black");
+        $("#chat-content").empty();
+        $("#btn-sub-msg").hide();
         console.log("user logged out");
     }
 
@@ -138,7 +143,6 @@ var userMessage = "";
 $("#btn-sub-msg").on("click", function (event) {
     var user = firebase.auth().currentUser;
     userMessage = user.displayName + " : " + $("#userMessage1").val().trim();
-    console.log(userMessage);
 
     //Code for the push
     database.ref().push({
@@ -152,9 +156,6 @@ $("#btn-sub-msg").on("click", function (event) {
 
 //add user messages from user from firebase to html
 database.ref().on("child_added", function (childSnapshot) {
-
-    // Log everything that's coming out of snapshot
-    console.log(childSnapshot.val().message);
     // Change the HTML to reflect
     var newMessage = $("<p>").text(childSnapshot.val().message);
     $("#chat-content").append(newMessage);
@@ -178,8 +179,8 @@ $.ajax({
     for(var i=0; i < 15; i++){
         var convertedTime = moment(response.events[i].strTime,"HH:mm").format("hh:mm a");
         var newGame = $("<div>").addClass("game")
-        var teams = $("<p>").text(response.events[i].strEvent);
-        var gameTime = $("<p>").text(response.events[i].dateEvent + " at " + convertedTime);
+        var teams = $("<p>").text(response.events[i].strEvent).addClass("game-item");
+        var gameTime = $("<p>").text(response.events[i].dateEvent + " at " + convertedTime).addClass("game-item");
         newGame.append(teams,gameTime);
         
         $("#upcoming-games").append(newGame);
@@ -221,7 +222,6 @@ function leagueInfo(){
                 url: queryURL4,
                 method: "GET"
             }) .then(function(response4) {
-                    console.log(response4);
                 for(var k=0; k<response4.table.length;k++){
                     var tableTeam = response4.table[k].name;
                     var tableGP = response4.table[k].played;
@@ -254,7 +254,7 @@ function teamResults(teamID){
         url: queryURL5,
         method: "GET"
     }) .then(function(response5) {
-        console.log(response5)
+
         for(var l=0; l<response5.results.length;l++){
             var gameMatch = $("<div>").addClass("hist-games");
             var gameTeams = $("<p>").text(response5.results[l].strEvent).addClass("game-teams");
@@ -266,14 +266,57 @@ function teamResults(teamID){
     });
 }
 
+function teamHighlights(teamName){
+    //Calls the sportDB api to get all live games
+    var queryURL6 = "https://www.thesportsdb.com/api/v1/json/4013017/eventshighlights.php?l=English%20Premier%20League"
+    $.ajax({
+        url: queryURL6,
+        method: "GET"
+    }) .then(function(response6) {
+        console.log(response6)
+        for(var h=0; h<response6.tvhighlights.length; h++){
+            var matchTeams = response6.tvhighlights[h].strEvent
+            var matchLink = response6.tvhighlights[h].strVideo
+            if(matchTeams.includes(teamName)){
+            
+            var highTitle = $("<p>").text(response6.tvhighlights[h].strEvent).addClass("lbl-high");
+            $("#title-high").append(highTitle);
+            
+            var updatedLink = matchLink.replace("watch?v=","embed/")
+            console.log(updatedLink)
+            $("#video-player").attr("src",updatedLink)
+            }
+        }
+    });
+}
+
+function liveScore(){
+    //Calls the sportDB api to get all live games
+    var queryURL7 = "https://www.thesportsdb.com/api/v1/json/1/latestsoccer.php"
+    $.ajax({
+        url: queryURL7,
+        method: "GET"
+    }) .then(function(response7) {
+        console.log(response7)
+        for(var l=0; l<response7.tvhighlights.length; l++){
+
+        }
+    });
+}
+
 //This will empty the historical results div and make another call for the last 5 match results for the chosen team
 $("#team-select").on('change',function(){
     $("#hist-results").empty();
+    $("#title-high").empty();
     var getValue=$(this).find('option:selected').attr('id');
+    var teamValue=$(this).find('option:selected').text();
     teamResults(getValue);
+    teamHighlights(teamValue);
   });
 
+liveScore();
 teamResults("133604");
+teamHighlights("Arsenal")
 
 //Mike End 
 
