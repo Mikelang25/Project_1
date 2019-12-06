@@ -35,7 +35,11 @@
         </div>
     </div>
     <div class="row">
-        <div class = "col-md-12">
+        <!-- container for live scores -->
+        <div id="live-scores"class="col-md-9 live-container">
+
+        </div>
+        <div class = "col-md-3 button-container">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalLogin">
                 Login
@@ -125,12 +129,6 @@
         </div>
     </div>
     <div class = "row">
-        <div id="game-in-progess"class="col-md-12 text-center">
-            SPACE USED FOR REAL TIME SCORES.....
-        </div>
-    </div>
-
-    <div class = "row">
         <div class="col-md-3 left-container">
             <div class="row">
                 <div class="col-md-1"></div>
@@ -142,7 +140,7 @@
             </div>
             <div class="row">
                 <div class="col-md-1"></div>
-                <div class="col-md-10 text-center">
+                <div class="col-md-10 text-center login-container">
                     <span id="user-logged-in"></span>
                 </div>
                 <div class="col-md-1"></div> 
@@ -164,6 +162,11 @@
                 </div>
                 <div class="col-md-1"></div> 
             </div>
+            <div class="row">
+                <div class="col-md-12 text-center twitter-left">
+                    <a class="twitter-timeline" data-lang="en" data-width="400" data-height="500" data-theme="light" data-link-color="#E81C4F" href="https://twitter.com/premierleague?ref_src=twsrc%5Etfw">Tweets by premierleague</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
         </div>
         <div class="col-md-7 main-container text-center">
             <div class="row">
@@ -175,12 +178,32 @@
                 </div>
             </div>
             <div class="row">
-                <div id="hist-results"class="text-center col-md-12">
+               <div class="col-md-1"></div>
+               <div class="col-md-10">
+                   <div class="row">
+                    <div id="hist-results"class="text-center col-md-12">
 
-                </div>
+                    </div>
+                   </div>
+               </div> 
+
+                <div class="col-md-1"></div>
             </div>
             <div class = "row">
-                <div class="col-md-7"></div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12" id="title-high">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 hightlight-main" id="high-content">
+                                <iframe id="video-player" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
                 <div class="col-md-5">
                     <div class="row">
                         <div class="col-md-12 messages-title text-center">
@@ -192,7 +215,7 @@
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div id = "chat-content" class="col-md-10 messages-main text-left">
-
+                                    
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>

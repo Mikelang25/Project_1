@@ -8,14 +8,32 @@ td{
     border-radius: 5px;
     float:right;
 }
+
+.login-container{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.live-container, .button-container{
+    border-bottom:1pt solid black;
+}
+
+.twitter-left{
+    margin-top:20px;
+}
+
 .game{
     border:1pt solid black;
     margin-top:5px;
     border-radius: 5px;
     line-height: 30%;
     padding-top:15px;
-    font-size:10pt;
+    font-size:8pt;
     font-weight: bold;
+}
+
+.game-item{
+    width:100%;
 }
 
 .user-items{
@@ -29,12 +47,11 @@ td{
 }
 
 .left-container{
-    border:1pt solid black;
-    margin-top:5px;
+    border-right:1pt solid black;
+    border-bottom:1pt solid black;
 }
 
 .main-container{
-    border:1pt solid black;
     margin-top:5px;
 }
 
@@ -73,12 +90,20 @@ td{
 }
 
 .messages-title{
+    margin-top:10px;
+    border-top:1pt solid black;
     border-left:1pt solid black;
+    border-right:1pt solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .chat-main{
     border-left:1pt solid black;
     border-bottom:1pt solid black;
+    border-right:1pt solid black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     height:725px;
 }
 
@@ -87,6 +112,8 @@ td{
     margin-bottom:10px;
     border:1pt solid black;
     height:500px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .messages-input{
@@ -94,9 +121,21 @@ td{
     height:150px;
 }
 
+.hightlight-main{
+    margin-top:20px;
+    border:1pt solid black;
+    background-color: black;
+}
+
 .lbl-msg{
     margin-top:15px;
     font-size:18pt;
+}
+
+.lbl-high{
+    font-size:18pt;
+    margin-top:10px;
+    margin-bottom:-10px;
 }
 
 #upcoming-games{
@@ -106,7 +145,7 @@ td{
 
 #hist-results{
     border:1pt solid black;
-    padding-left:70px;
+
 }
 
 #game-in-progess{
@@ -139,4 +178,11 @@ td{
    border-radius: 5px;
 }
 
+#video-player{
+    width: 100%;
+}
+
+#time{
+    margin-top:10px;
+}
 
