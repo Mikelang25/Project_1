@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
     <script src="https://kit.fontawesome.com/fc7e5aa30b.js" crossorigin="anonymous"></script>
 
-   
+
     <title>Premier League Fan Zone</title>
 
 
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
 </head>
 
 <body>
     <div class="row">
         <div class="col-md-4">
-            <img id="prem-logo"src="https://img.icons8.com/color/144/000000/the-premier-league.png">
+            <img id="prem-logo" src="https://img.icons8.com/color/144/000000/the-premier-league.png">
         </div>
         <div class="col-md-8 main-title">
             Premier League Fan Zone
@@ -40,18 +38,17 @@
     </div>
     <div class="row">
         <!-- container for live scores -->
-        <div id="live-scores"class="col-md-9 live-container">
-            
+        <div id="live-scores" class="col-md-9 live-container">
+
         </div>
-        <div class = "col-md-3 button-container">
+        <div class="col-md-3 button-container">
             <!-- Button trigger modal -->
             <button id="login-button" type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalLogin">
                 Login
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -93,8 +90,7 @@
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -107,18 +103,18 @@
 
                             <form id="newUserInputForm">
                                 <div class="form-group">
-                                    <label for="newUserInputFirstName">Screen Name</label>
+                                    <label id="newUserInputLabelScreenName" for="newUserInputFirstName">Screen Name</label>
                                     <input type="text" class="form-control" id="newUserInputFirstNameA"></input>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="newUserInputEmail">Email address</label>
+                                    <label id="newUserInputLabelEmail" for="newUserInputEmail">Email address</label>
                                     <input type="email" class="form-control" id="newUserInputEmailA"></input>
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="newUserInputPassword">Password</label>
+                                    <label id="newUserInputLabelPassword" for="newUserInputPassword">Password</label>
                                     <input type="password" class="form-control" id="newUserInputPasswordA"></input>
                                 </div>
 
@@ -132,7 +128,7 @@
 
         </div>
     </div>
-    <div class = "row">
+    <div class="row">
         <div class="col-md-3 left-container">
             <div class="row">
                 <div class="col-md-1"></div>
@@ -140,14 +136,14 @@
                     <div id="time"></div>
                     <div id="time2"></div>
                 </div>
-                <div class="col-md-1"></div>      
+                <div class="col-md-1"></div>
             </div>
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10 weather-container text-center">
                     <div class="row">
                         <div id="weather-info" class="col-md-7"></div>
-                        <div id="weather-icon" class ="col-md-5"></div>
+                        <div id="weather-icon" class="col-md-5"></div>
                     </div>
                 </div>
                 <div class="col-md-1"></div>
@@ -157,14 +153,14 @@
                 <div class="col-md-10 text-center login-container">
                     <span id="user-logged-in"></span>
                 </div>
-                <div class="col-md-1"></div> 
+                <div class="col-md-1"></div>
             </div>
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10 text-center">
                     <span class="lbl-standings">Premier League Standings</span>
                     <table id="premiere-standings" class="text-center">
-                        <tr class = "table-labels">
+                        <tr class="table-labels">
                             <th>Team</th>
                             <th>GP</th>
                             <th>W</th>
@@ -174,11 +170,12 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-md-1"></div> 
+                <div class="col-md-1"></div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center twitter-left">
-                    <a class="twitter-timeline" data-lang="en" data-width="400" data-height="500" data-theme="light" data-link-color="#E81C4F" href="https://twitter.com/premierleague?ref_src=twsrc%5Etfw">Tweets by premierleague</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <a class="twitter-timeline" data-lang="en" data-width="400" data-height="500" data-theme="light" data-link-color="#E81C4F" href="https://twitter.com/premierleague?ref_src=twsrc%5Etfw">Tweets by premierleague</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>
@@ -192,18 +189,18 @@
                 </div>
             </div>
             <div class="row">
-               <div class="col-md-1"></div>
-               <div class="col-md-10">
-                   <div class="row">
-                    <div id="hist-results"class="text-center col-md-12">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div id="hist-results" class="text-center col-md-12">
 
+                        </div>
                     </div>
-                   </div>
-               </div> 
+                </div>
 
                 <div class="col-md-1"></div>
             </div>
-            <div class = "row">
+            <div class="row">
                 <div class="col-md-7">
                     <div class="row">
                         <div class="col-md-12" id="title-high">
@@ -213,7 +210,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10 hightlight-main" id="high-content">
-                                <iframe id="video-player" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe id="video-player" height="300" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -228,8 +225,8 @@
                         <div class="col-md-12 chat-main">
                             <div class="row">
                                 <div class="col-md-1"></div>
-                                <div id = "chat-content" class="col-md-10 messages-main text-left">
-                                    
+                                <div id="chat-content" class="col-md-10 messages-main text-left">
+
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
@@ -238,14 +235,14 @@
                                 <div class="col-md-10 messages-input">
                                     <div class="form-group">
                                         <label for="userMessage1"></label>
-                                        <textarea id="userMessage1" class="input-msg" type = "text" name="subject" placeholder="Leave a message!"></textarea>
+                                        <textarea id="userMessage1" class="input-msg" type="text" name="subject" placeholder="Leave a message!"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <input id="btn-sub-msg"type="submit" name="submit">
+                                    <input id="btn-sub-msg" type="submit" name="submit">
                                 </div>
                             </div>
                         </div>
@@ -253,15 +250,15 @@
                 </div>
             </div>
         </div>
-        <div id="upcoming-games"class="col-md-2 text-center right-container">
+        <div id="upcoming-games" class="col-md-2 text-center right-container">
             <br>
             <span class="lbl-upcoming">Upcoming Games</span>
         </div>
     </div>
 
 
-    
- </body>
+
+</body>
 <script src="https://cdn.jsdelivr.net/momentjs/2.18.1/moment.min.js"></script>
 <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
 
