@@ -38,7 +38,8 @@ $(document).ready(function () {
 
             $("#btn-sub-msg").show();
             $("#chat-content").css("background-color", "white")
-            $("#user-logged-in").text("Welcome!  " + user.displayName);
+            $("#chat-content").removeClass("text-center");
+            $("#user-logged-in").text("Cheers!  " + user.displayName);
             $("#currentUserDetails").empty();
             $("#currentUserDetails").append("First Name: " + user.displayName + "<br>");
             $("#currentUserDetails").append("Email: " + user.email);
@@ -47,8 +48,7 @@ $(document).ready(function () {
             //query to database for all user messages limited to last 25 messages
 
             var ref = firebase.database().ref();
-            ref.limitToLast(25).on("child_added", function (snapshot) {
-                console.log(snapshot);
+            ref.on("child_added", function (snapshot) {
 
                 var messagesStored = $("<p>").text(snapshot.val().message);
 
@@ -61,6 +61,11 @@ $(document).ready(function () {
             $("#chat-content").css("background-color", "black");
             $("#chat-content").empty();
             $("#btn-sub-msg").hide();
+            var lockImage = $("<div>").html("<i class='fas fa-user-lock fa-9x'></i>").css("color","white").addClass("lock-image")
+            $("#chat-content").addClass("text-center");
+            var loginMessage = $("<div>").text("Access only for Premier League Fan Zone Users! Create an account or login to chat with us").css("color","white").css("font-size","18pt")
+            $("#chat-content").append(lockImage,loginMessage);
+
             console.log("user logged out");
         }
 
@@ -103,9 +108,6 @@ $(document).ready(function () {
 
         var newUserEmailSubmitted = $("#newUserInputEmailA").val().trim();
         var newUserPasswordSubmitted = $("#newUserInputPasswordA").val().trim();
-        console.log(newUserFirstNameSubmitted);
-        console.log(newUserEmailSubmitted);
-        console.log(newUserPasswordSubmitted);
         $("#exampleModalA").modal("hide");
         $("#newUserInputFirstNameA").val("");
         $("#newUserInputPasswordA").val("");
@@ -118,7 +120,6 @@ $(document).ready(function () {
             // Update successful.
 
             var user = firebase.auth().currentUser;
-            console.log(user.displayName);
             $("#user-logged-in").text("Welcome!  " + user.displayName);
             user.updateProfile({
                 displayName: newUserFirstNameSubmitted,
@@ -137,23 +138,6 @@ $(document).ready(function () {
 
 
     });
-    // //add new favorite team
-    //  $("select.teamList").change(function (event) {
-    //     var user = firebase.auth().currentUser;
-    //     event.preventDefault();
-    //     var selectedTeam = $(this).children("option:selected").val();
-    //     console.log(selectedTeam)
-    //     console.log(user.displayName);
-    //     $(".favoriteTeamBox").html(user.displayName + ", your Favorite Team: " + selectedTeam);
-    //     var selectedUserTeam = {
-    //         selectedTeamForDatabase: selectedTeam
-    //     }
-
-    //     // Uploads new favorite team data to the database
-    //     database.ref(user.uid).set(selectedUserTeam);
-
-    // });
-
 
     // Initial Values
     var userMessage = "";
@@ -243,12 +227,6 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (response4) {
                 for (var k = 0; k < response4.table.length; k++) {
-                    var tableTeam = response4.table[k].name;
-                    var tableGP = response4.table[k].played;
-                    var tableWins = response4.table[k].win;
-                    var tableDraws = response4.table[k].draw;
-                    var tableLosses = response4.table[k].loss;
-                    var tablePoints = response4.table[k].total;
 
                     var tableItem = $("<tr>").append(
                         $("<td>").text(response4.table[k].name),
@@ -293,7 +271,6 @@ $(document).ready(function () {
             url: queryURL6,
             method: "GET"
         }).then(function (response6) {
-            console.log(response6)
             for (var h = 0; h < response6.tvhighlights.length; h++) {
                 var matchTeams = response6.tvhighlights[h].strEvent
                 var matchLink = response6.tvhighlights[h].strVideo
@@ -303,7 +280,6 @@ $(document).ready(function () {
                     $("#title-high").append(highTitle);
 
                     var updatedLink = matchLink.replace("watch?v=", "embed/")
-                    console.log(updatedLink)
                     $("#video-player").attr("src", updatedLink)
                 }
             }
@@ -312,14 +288,28 @@ $(document).ready(function () {
 
     function liveScore() {
         //Calls the sportDB api to get all live games
-        var queryURL7 = "https://www.thesportsdb.com/api/v1/json/1/latestsoccer.php"
+        var queryURL7 = "https://www.thesportsdb.com/api/v1/json/4013017/latestsoccer.php?l=English%20Premier%20League"
         $.ajax({
             url: queryURL7,
             method: "GET"
         }).then(function (response7) {
             console.log(response7)
-            for (var l = 0; l < response7.tvhighlights.length; l++) {
-
+            for (var l = 0; l < response7.teams.Match.length; l++) {
+                var liveLeague = response7.teams.Match[l].League 
+                if(liveLeague =="English Premier League"){
+                    var liveMatch = $("<div>")
+                    var liveHome = $("<p>").text(response7.teams.Match[l].HomeTeam);
+                    var liveAway = $("<p>").text(response7.teams.Match[l].AwayTeam);
+                    var homeGoals = $("<p>").text(response7.teams.Match[l].HomeGoals);
+                    var awayGoals = $("<p>").text(response7.teams.Match[l].AwayGoals);
+                    var matchPart = $("<div>").append(liveHome,liveAway).css("display","inline-block").css("margin-right","15px");
+                    var matchScore = $("<div>").append(homeGoals,awayGoals).css("display","inline-block").css("margin-right","10px");
+                    var updatedTime= response7.teams.Match[l].Time.replace("Finished","FT");
+                    updatedTime = updatedTime.replace("Not started","0'");
+                    var timeLeft = $("<div>").text(updatedTime).css("display","inline-block");
+                    liveMatch.append(matchPart,matchScore,timeLeft).css({"float":"left","padding":"20px"}).addClass("live-match");
+                    $("#live-scores").append(liveMatch);
+                }
             }
         });
     }
@@ -334,7 +324,88 @@ $(document).ready(function () {
         teamHighlights(teamValue);
     });
 
+    function locateWeather(){
+
+        $("#weather-info").empty();
+        $("#weather-icon").empty();
+
+        var locationSelected = "London";
+        var queryURL8 = "https://dataservice.accuweather.com/locations/v1/cities/search?apikey=HttSJfsjnPLSqcMJkfz97hZrKXcNXMHH&q=" + locationSelected;
+
+        $.ajax({
+            url: queryURL8,
+            method: "GET"
+        }) .then(function(response) {
+            var queryURL9 = "https://dataservice.accuweather.com/forecasts/v1/daily/1day/" + response[0].Key + "?apikey=HttSJfsjnPLSqcMJkfz97hZrKXcNXMHH&details=true&metric=true";
+            $.ajax({
+                url: queryURL9,
+                method: "GET"
+            }) .then(function(weather) {
+                console.log(weather);
+                var weatherInfo = $("<div>").addClass("weather")
+                var temp = $("<div>").text("High / Low: "  + (parseInt(weather.DailyForecasts[0].Temperature.Maximum.Value)*1.8 +32).toFixed(0) + " F" + "       " + (parseInt(weather.DailyForecasts[0].Temperature.Minimum.Value)*1.8 +32).toFixed(0)+" F").addClass("weather-item");
+                var temp2 = $("<div>").text(weather.Headline.Text).addClass("weather-item");
+                weatherInfo.append(temp);
+                weatherInfo.append(temp2);
+                $("#weather-info").append(weatherInfo);
+                var currentWeather = weather.Headline.Category;
+                var iconSelect; 
+                var iconColor;
+                switch(currentWeather){
+
+                    case "snow/rain":
+                        iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
+                        iconColor = "lightblue"
+                    break;
+                    case "snow/ice":
+                            iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
+                            iconColor = "lightblue"
+                        break;
+                    case "cooler":
+                        iconSelect = "<i class='fas fa-temperature-low fa-6x'></i>"
+                        iconColor = "lightblue"
+                    break;
+                    case "rain":
+                        iconSelect = "<i class='fas fa-cloud-rain fa-6x'></i>"
+                        iconColor = "grey"
+                    break;
+                    case "":
+                        iconSelect = "<i class='fas fa-sun fa-6x'></i>"
+                        iconColor = "orange"
+                    break;
+                    case "thunderstorm":
+                        iconSelect = "<i class='fas fa-poo-storm fa-6x'></i>"
+                        iconColor = "orange"
+                    break;
+                    case "snow":
+                        iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
+                        iconColor = "lightblue"
+                    break;
+                    case "wind":
+                        iconSelect = "<i class='fas fa-wind fa-6x' color='black'></i>"
+                        iconColor = "grey"
+                    break;
+
+                }
+
+                var weatherIcon = $("<div>").html(iconSelect).addClass("weather-icon-sun").css("color",iconColor);
+                $("#weather-icon").append(weatherIcon);
+
+                var sunRise =$("<div>").text("Sun Rise: " + moment(weather.DailyForecasts[0].Sun.Rise).format("hh:mm a")).addClass("weather-item");
+                var sunSet = $("<div>").text("Sun Set: " + moment(weather.DailyForecasts[0].Sun.Set).format("hh:mm a")).addClass("weather-item");
+
+                $("#weather-info").append(sunRise);
+                $("#weather-info").append(sunSet);
+
+            });
+        });
+    }
+
+
+
+
     liveScore();
+    locateWeather();
     teamResults("133604");
     teamHighlights("Arsenal")
 
@@ -348,5 +419,19 @@ $(document).ready(function () {
         setTimeout(currentTime, 1000);
     };
     currentTime();
+
+    // Helper functions
+    function focusWaiter(element) {
+        setTimeout(function() {
+            $(element).focus();
+        }, 500);
+    }
+    // Wait for input to focus on
+    $("#login-button").on("click", function(){
+        focusWaiter('#userInputEmail');
+    });
+    $("#new-user-button").on("click", function(){
+        focusWaiter('#newUserInputFirstNameA');
+    });
 
 });

@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+    <script src="https://kit.fontawesome.com/fc7e5aa30b.js" crossorigin="anonymous"></script>
 
    
     <title>Premier League Fan Zone</title>
@@ -30,18 +31,21 @@
 
 <body>
     <div class="row">
-        <div class="col-md-12 main-title text-center">
-            The Premier League Zone
+        <div class="col-md-4">
+            <img id="prem-logo"src="https://img.icons8.com/color/144/000000/the-premier-league.png">
+        </div>
+        <div class="col-md-8 main-title">
+            Premier League Fan Zone
         </div>
     </div>
     <div class="row">
         <!-- container for live scores -->
         <div id="live-scores"class="col-md-9 live-container">
-
+            
         </div>
         <div class = "col-md-3 button-container">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalLogin">
+            <button id="login-button" type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalLogin">
                 Login
             </button>
 
@@ -84,7 +88,7 @@
 
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalA">
+            <button id="new-user-button" type="button" class="btn btn-primary buttons-main" data-toggle="modal" data-target="#exampleModalA">
                 New user
             </button>
 
@@ -132,11 +136,21 @@
         <div class="col-md-3 left-container">
             <div class="row">
                 <div class="col-md-1"></div>
-                <div class="col-md-10 text-center">
+                <div class="col-md-10 text-center time-container">
                     <div id="time"></div>
                     <div id="time2"></div>
                 </div>
                 <div class="col-md-1"></div>      
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 weather-container text-center">
+                    <div class="row">
+                        <div id="weather-info" class="col-md-7"></div>
+                        <div id="weather-icon" class ="col-md-5"></div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
             </div>
             <div class="row">
                 <div class="col-md-1"></div>
