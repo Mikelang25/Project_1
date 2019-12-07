@@ -1,235 +1,269 @@
-td{
-    border-bottom:1pt solid black;
-    padding-bottom:3px;
+td {
+    border-bottom: 1pt solid black;
+    padding-bottom: 3px;
 }
 
-.buttons-main{
-    margin:5px;
+.buttons-main {
+    margin: 5px;
     border-radius: 5px;
-    float:right;
+    float: right;
 }
 
-.login-container{
-    margin-top:20px;
-    margin-bottom:20px;
+.login-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.live-container, .button-container{
-    border-bottom:1pt solid black;
+.live-container,
+.button-container {
+    border-bottom: 1pt solid black;
 }
 
-.time-container{
-    margin-top:20px;
+.time-container {
+    margin-top: 20px;
     border-left: 1pt solid black;
     border-right: 1pt solid black;
     border-top: 1pt solid black;
-    border-top-left-radius:15px;
-    border-top-right-radius:15px;
-}
-
-.weather-container{
-    font-size:8pt;
-    border-left: 1pt solid black;
-    border-right: 1pt solid black;
-    border-bottom: 1pt solid black;
-    border-bottom-left-radius:15px;
-    border-bottom-right-radius:15px;
-    padding:10px;
-}
-
-
-.twitter-left{
-    margin-top:20px;
-}
-
-.game{
-    border:1pt solid black;
-    margin-top:5px;
-    border-radius: 5px;
-    line-height: 30%;
-    padding-top:15px;
-    font-size:8pt;
-    font-weight: bold;
-}
-
-.game-item{
-    width:100%;
-}
-
-.user-items{
-    margin:7px;
-    border-radius: 10px;
-}
-
-.main-title{
-    font-size:48pt;
-     margin-top:20px;
-}
-
-.left-container{
-    border-right:1pt solid black;
-    border-bottom:1pt solid black;
-}
-
-.main-container{
-    margin-top:5px;
-}
-
-.table-labels{
-    background-color:gray;
-}
-
-.lbl-match{
-    margin-top:15px;
-    font-size: 18pt;
-    margin-left:-60px;
-}
-
-.hist-games{
-    border-radius:5px;
-    border:1pt solid black;
-    line-height: 70%;
-    padding-top:15px;
-    margin:5px;
-    width:18%;
-    float:left;
-}
-
-.game-teams{
-    font-size:10pt;
-}
-
-.game-details{
-    font-size: 8pt;
-    font-weight: bold;
-}
-
-.game-results{
-    font-size:14pt;
-    font-weight: bolder;
-}
-
-.messages-title{
-    margin-top:10px;
-    border-top:1pt solid black;
-    border-left:1pt solid black;
-    border-right:1pt solid black;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
 
-.chat-main{
-    border-left:1pt solid black;
-    border-bottom:1pt solid black;
-    border-right:1pt solid black;
+.weather-container {
+    font-size: 8pt;
+    border-left: 1pt solid black;
+    border-right: 1pt solid black;
+    border-bottom: 1pt solid black;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    height:725px;
+    padding: 10px;
 }
 
-.messages-main{
-    margin-top:10px;
-    margin-bottom:10px;
-    border:1pt solid black;
-    height:500px;
+.twitter-left {
+    margin-top: 20px;
+}
+
+.game {
+    border: 1pt solid black;
+    margin-top: 5px;
+    border-radius: 5px;
+    line-height: 30%;
+    padding-top: 15px;
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+.game-item {
+    width: 100%;
+}
+
+.user-items {
+    margin: 7px;
+    border-radius: 10px;
+}
+
+.main-title {
+    font-size: 48pt;
+    margin-top: 20px;
+}
+
+.left-container {
+    border-right: 1pt solid black;
+    border-bottom: 1pt solid black;
+}
+
+.main-container {
+    margin-top: 5px;
+}
+
+.table-labels {
+    background-color: gray;
+}
+
+.lbl-match {
+    margin-top: 15px;
+    font-size: 18pt;
+    margin-left: -60px;
+}
+
+.hist-games {
+    border-radius: 5px;
+    border: 1pt solid black;
+    line-height: 70%;
+    padding-top: 15px;
+    margin: 5px;
+    width: 18%;
+    float: left;
+}
+
+.game-teams {
+    font-size: 10pt;
+}
+
+.game-details {
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+.game-results {
+    font-size: 14pt;
+    font-weight: bolder;
+}
+
+.messages-title {
+    margin-top: 10px;
+    border-top: 1pt solid black;
+    border-left: 1pt solid black;
+    border-right: 1pt solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.chat-main {
+    border-left: 1pt solid black;
+    border-bottom: 1pt solid black;
+    border-right: 1pt solid black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 725px;
+}
+
+.messages-main {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1pt solid black;
+    height: 500px;
     overflow: scroll;
     overflow-x: hidden;
 }
 
-.lock-image{
-    margin-top:30px;
+.lock-image {
+    margin-top: 30px;
 }
 
-.messages-input{
-    border:1pt solid black;
-    height:150px;
+.messages-input {
+    border: 1pt solid black;
+    height: 150px;
 }
 
-.hightlight-main{
-    margin-top:20px;
-    border:1pt solid black;
+.hightlight-main {
+    margin-top: 20px;
+    border: 1pt solid black;
     background-color: black;
 }
 
-.lbl-msg{
-    margin-top:15px;
-    font-size:18pt;
+.lbl-msg {
+    margin-top: 15px;
+    font-size: 18pt;
 }
 
-.lbl-high{
-    font-size:18pt;
-    margin-top:10px;
-    margin-bottom:-10px;
+.lbl-high {
+    font-size: 18pt;
+    margin-top: 10px;
+    margin-bottom: -10px;
 }
 
-.live-match{
-    border:1pt solid black;
+.live-match {
+    border: 1pt solid black;
     border-radius: 15px;
     line-height: 10%;
-    margin-right:20px;
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-left:20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
 }
 
-#upcoming-games{
+#upcoming-games {
     padding-left: 30px;
-    padding-right:30px; 
+    padding-right: 30px;
 }
 
-#prem-logo{
-    margin-top:20px;
-    margin-left:40px;
+#prem-logo {
+    margin-top: 20px;
+    margin-left: 40px;
 }
 
-#hist-results{
-    border:1pt solid black;
-
+#hist-results {
+    border: 1pt solid black;
 }
 
-#game-in-progess{
-    font-size:30pt;
-    border:1pt solid black;
+#game-in-progess {
+    font-size: 30pt;
+    border: 1pt solid black;
 }
 
-#team-dropdown{
-    margin-top:20px;
-    margin-bottom:20px;
+#team-dropdown {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-#premiere-standings{
-    margin-top:5px;
+#premiere-standings {
+    margin-top: 5px;
     border: 1pt solid black;
     width: 100%;
 }
 
-#team-select{
-    margin-top:10px;
+#team-select {
+    margin-top: 10px;
 }
 
-#userMessage1{
-    height:100px;
-    width:100%;
-}
-
-#btn-sub-msg{
-   margin-top:10px; 
-   border-radius: 5px;
-}
-
-#video-player{
+#userMessage1 {
+    height: 100px;
     width: 100%;
 }
 
-#time{
-    margin-top:10px;
+#btn-sub-msg {
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
-#live-scores{
-    margin-top:20px;
+#video-player {
+    width: 100%;
 }
 
-.button-container{
-    margin-top:20px;
+#time {
+    margin-top: 10px;
 }
 
+#live-scores {
+    margin-top: 20px;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+#newUserInputLabelScreenName {
+    margin-left: 20px;
+}
+
+#newUserInputLabelEmail {
+    margin-left: 20px;
+}
+
+#newUserInputLabelPassword {
+    margin-left: 20px;
+}
+
+.modal-header {
+    font-weight: bolder;
+}
+
+.form-control {
+    width: 75%;
+    margin-left: 20px;
+}
+
+#newUserSubmit {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#userInputEmail {
+    margin-left: 3px;
+    margin-bottom: 5px;
+}
+
+#userInputPassword {
+    margin-left: 3px;
+    margin-bottom: 5px;
+}
