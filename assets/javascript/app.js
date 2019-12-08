@@ -236,6 +236,7 @@ $(document).ready(function () {
                         $("<td>").text(response4.table[k].loss),
                         $("<td>").text(response4.table[k].total)
                     )
+                    tableItem.addClass("table-content")
                     $("#premiere-standings").append(tableItem);
                 }
 

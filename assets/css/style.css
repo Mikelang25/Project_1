@@ -1,12 +1,29 @@
+body{
+    font-family: 'Frank Ruhl Libre', serif;
+}
+
 td {
     border-bottom: 1pt solid black;
     padding-bottom: 3px;
+}
+
+.header-main{
+    background-color: #3D195B;
+    border:none;
 }
 
 .buttons-main {
     margin: 5px;
     border-radius: 5px;
     float: right;
+    background-color: gray;
+}
+
+.lbl-standings, .lbl-match, .lbl-high, .lbl-upcoming{
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size:18pt;
+    font-weight:bold;
+
 }
 
 .login-container {
@@ -26,6 +43,8 @@ td {
     border-top: 1pt solid black;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    background-color: #3D195B;
+    color:whitesmoke
 }
 
 .weather-container {
@@ -36,6 +55,7 @@ td {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     padding: 10px;
+    background-image: URL("../images/so-white.png");
 }
 
 .twitter-left {
@@ -49,7 +69,9 @@ td {
     line-height: 30%;
     padding-top: 15px;
     font-size: 8pt;
-    font-weight: bold;
+    font-weight: bolder;
+    color:white;
+    background-image: URL("../images/pool_table.png");
 }
 
 .game-item {
@@ -62,13 +84,19 @@ td {
 }
 
 .main-title {
-    font-size: 48pt;
+    font-size: 84pt;
     margin-top: 20px;
+    color:whitesmoke;
+    font-family: 'Bebas Neue', cursive;
 }
 
 .left-container {
     border-right: 1pt solid black;
-    border-bottom: 1pt solid black;
+    background-image: URL("../images/white_carbon.png");
+}
+
+.container-graph{
+    margin-top:20px;
 }
 
 .main-container {
@@ -76,7 +104,12 @@ td {
 }
 
 .table-labels {
-    background-color: gray;
+    background-color: #3D195B;
+    color:whitesmoke
+}
+
+.table-content{
+    background-color: white;
 }
 
 .lbl-match {
@@ -93,6 +126,7 @@ td {
     margin: 5px;
     width: 18%;
     float: left;
+    background-color: whitesmoke;
 }
 
 .game-teams {
@@ -170,6 +204,7 @@ td {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 20px;
+    background-color: whitesmoke;
 }
 
 #upcoming-games {
@@ -184,6 +219,7 @@ td {
 
 #hist-results {
     border: 1pt solid black;
+    background-color: #3D195B;
 }
 
 #game-in-progess {
@@ -199,11 +235,14 @@ td {
 #premiere-standings {
     margin-top: 5px;
     border: 1pt solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     width: 100%;
 }
 
 #team-select {
     margin-top: 10px;
+    font-family: 'Frank Ruhl Libre', serif;
 }
 
 #userMessage1 {
@@ -266,4 +305,9 @@ td {
 #userInputPassword {
     margin-left: 3px;
     margin-bottom: 5px;
+}
+
+#user-logged-in{
+    font-size:18pt;
+    font-weight:bold;
 }
