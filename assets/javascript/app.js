@@ -97,6 +97,7 @@ $(document).ready(function () {
         auth.signOut().then(() => {
         $("#chat-content").empty();
         alert("you have been logged out")
+        console.log("user logged out");
         });
     })
 
@@ -118,27 +119,22 @@ $(document).ready(function () {
 
         }).then(function () {
             // Update successful.
-
+         
             var user = firebase.auth().currentUser;
-            $("#user-logged-in").text("Welcome!  " + user.displayName);
+           
             user.updateProfile({
                 displayName: newUserFirstNameSubmitted,
+                
             })
 
                 .catch(function (errorObject) {
                     // An error happened.
                     console.log("Errors handled: " + errorObject.code);
                 });
-         
-
-
-        });
-
-
-
-
+            });
+            
     });
-
+   
     // Initial Values
     var userMessage = "";
 
@@ -314,6 +310,72 @@ $(document).ready(function () {
             }
         });
     }
+    function playerSalary() {
+         //Calls the sportDB api to get all players by team
+         var queryURL10 = "https://www.thesportsdb.com/api/v1/json/4013017/lookup_all_players.php?id=133604"
+         $.ajax({
+             url: queryURL10,
+             method: "GET"
+         }).then(function (response10) {
+          
+            var playerNameArray = [];
+            var playerWageArray = [];
+for (k=0; k<response10.player.length; k++){
+    var playerName = response10.player[k].strPlayer;
+    
+    playerNameArray.push(playerName);
+    
+    var playerWage = response10.player[k].strWage.split('£',2);
+        
+        if (playerWage.length >1){
+            var playerWageSplit = playerWage[1];
+     
+ var playerWageSplitToNumber = playerWageSplit.split(' ',1);
+  var playerWageSplitToNumberNoCommas = parseFloat( playerWageSplitToNumber[0].replace(",",""));
+  console.log(playerWageSplitToNumberNoCommas);
+
+ playerWageArray.push(playerWageSplitToNumberNoCommas);
+
+        }
+        else {var playerWageSplitToNumber = 0;
+
+        playerWageArray.push(playerWageSplitToNumber);};
+
+ 
+
+
+}
+console.log(playerNameArray);
+console.log(playerWageArray);
+
+new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels: playerNameArray,
+      datasets: [
+        {
+          label: "Salary (£,000)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#fc9003", "#D2B4DE", "#03fc07",
+          "#943126", "#B9770E" , "#D35400" , "#2C3E50", "#F7DC6F", "#D4EFDF", "#03fc73", "#1c03fc", "#fc0339",
+           "#f4fc03", "#a503fc",  "#fc03c6", "#03c2fc", "#b103fc", "#fc9d03", "#ecfc03", "#2803fc"  ],
+          data: playerWageArray,
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Team Player Wages for 2019-2020 Season'
+      }
+    }
+});
+             
+             
+         });
+    }
+    playerSalary();
+
 
     //This will empty the historical results div and make another call for the last 5 match results for the chosen team
     $("#team-select").on('change', function () {
@@ -323,8 +385,15 @@ $(document).ready(function () {
         var teamValue = $(this).find('option:selected').text();
         teamResults(getValue);
         teamHighlights(teamValue);
+
+
+
+
+
     });
 
+
+    
     function locateWeather(){
 
         $("#weather-info").empty();
