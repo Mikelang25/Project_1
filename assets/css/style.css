@@ -207,6 +207,10 @@ td {
     background-color: whitesmoke;
 }
 
+.container-graph{
+    height:800px;
+}
+
 #upcoming-games {
     padding-left: 30px;
     padding-right: 30px;
