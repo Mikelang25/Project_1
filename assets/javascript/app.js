@@ -10,6 +10,7 @@ $(document).ready(function () {
     var selectedTeam;
     var selectedUserTeam;
     var userEmailForLogin;
+    var chartCount = 0; 
 
     // Firebase configuration
     var firebaseConfig = {
@@ -61,10 +62,10 @@ $(document).ready(function () {
             $("#chat-content").css("background-color", "black");
             $("#chat-content").empty();
             $("#btn-sub-msg").hide();
-            var lockImage = $("<div>").html("<i class='fas fa-user-lock fa-9x'></i>").css("color","white").addClass("lock-image")
+            var lockImage = $("<div>").html("<i class='fas fa-user-lock fa-9x'></i>").css("color", "white").addClass("lock-image")
             $("#chat-content").addClass("text-center");
-            var loginMessage = $("<div>").text("Access only for Premier League Fan Zone Users! Create an account or login to chat with us").css("color","white").css("font-size","18pt")
-            $("#chat-content").append(lockImage,loginMessage);
+            var loginMessage = $("<div>").text("Access only for Premier League Fan Zone Users! Create an account or login to chat with us").css("color", "white").css("font-size", "18pt")
+            $("#chat-content").append(lockImage, loginMessage);
 
             console.log("user logged out");
         }
@@ -95,9 +96,9 @@ $(document).ready(function () {
         $("#currentUserDetails").empty("");
         $("#user-logged-in").empty("");
         auth.signOut().then(() => {
-        $("#chat-content").empty();
-        alert("you have been logged out")
-        console.log("user logged out");
+            $("#chat-content").empty();
+            alert("you have been logged out")
+            console.log("user logged out");
         });
     })
 
@@ -109,6 +110,7 @@ $(document).ready(function () {
 
         var newUserEmailSubmitted = $("#newUserInputEmailA").val().trim();
         var newUserPasswordSubmitted = $("#newUserInputPasswordA").val().trim();
+        $("#user-logged-in").text("Cheers!  " + newUserFirstNameSubmitted);
         $("#exampleModalA").modal("hide");
         $("#newUserInputFirstNameA").val("");
         $("#newUserInputPasswordA").val("");
@@ -119,22 +121,22 @@ $(document).ready(function () {
 
         }).then(function () {
             // Update successful.
-         
+
             var user = firebase.auth().currentUser;
-           
+
             user.updateProfile({
                 displayName: newUserFirstNameSubmitted,
-                
+
             })
 
                 .catch(function (errorObject) {
                     // An error happened.
                     console.log("Errors handled: " + errorObject.code);
                 });
-            });
-            
+        });
+
     });
-   
+
     // Initial Values
     var userMessage = "";
 
@@ -152,19 +154,19 @@ $(document).ready(function () {
         });
 
         $("#userMessage1").val("")
-    
-    $("#chat-content").empty();
-    //add user messages from firebase to html
-    database.ref().on("child_added", function (childSnapshot) {
-        // Change the HTML to reflect
-        var newMessage = $("<p>").text(childSnapshot.val().message);
-        $("#chat-content").append(newMessage);
 
-        // Handle the errors
-    }, function (errorObject) {
-        console.log("Errors handled: " + errorObject.code);
+        $("#chat-content").empty();
+        //add user messages from firebase to html
+        database.ref().on("child_added", function (childSnapshot) {
+            // Change the HTML to reflect
+            var newMessage = $("<p>").text(childSnapshot.val().message);
+            $("#chat-content").append(newMessage);
+
+            // Handle the errors
+        }, function (errorObject) {
+            console.log("Errors handled: " + errorObject.code);
+        });
     });
-});
 
 
     //Mike Begin 
@@ -292,109 +294,114 @@ $(document).ready(function () {
         }).then(function (response7) {
             console.log(response7)
             for (var l = 0; l < response7.teams.Match.length; l++) {
-                var liveLeague = response7.teams.Match[l].League 
-                if(liveLeague =="English Premier League"){
+                var liveLeague = response7.teams.Match[l].League
+                if (liveLeague == "English Premier League") {
                     var liveMatch = $("<div>")
                     var liveHome = $("<p>").text(response7.teams.Match[l].HomeTeam);
                     var liveAway = $("<p>").text(response7.teams.Match[l].AwayTeam);
                     var homeGoals = $("<p>").text(response7.teams.Match[l].HomeGoals);
                     var awayGoals = $("<p>").text(response7.teams.Match[l].AwayGoals);
-                    var matchPart = $("<div>").append(liveHome,liveAway).css("display","inline-block").css("margin-right","15px");
-                    var matchScore = $("<div>").append(homeGoals,awayGoals).css("display","inline-block").css("margin-right","10px");
-                    var updatedTime= response7.teams.Match[l].Time.replace("Finished","FT");
-                    updatedTime = updatedTime.replace("Not started","0'");
-                    var timeLeft = $("<div>").text(updatedTime).css("display","inline-block");
-                    liveMatch.append(matchPart,matchScore,timeLeft).css({"float":"left","padding":"20px"}).addClass("live-match");
+                    var matchPart = $("<div>").append(liveHome, liveAway).css("display", "inline-block").css("margin-right", "15px");
+                    var matchScore = $("<div>").append(homeGoals, awayGoals).css("display", "inline-block").css("margin-right", "10px");
+                    var updatedTime = response7.teams.Match[l].Time.replace("Finished", "FT");
+                    updatedTime = updatedTime.replace("Not started", "0'");
+                    var timeLeft = $("<div>").text(updatedTime).css("display", "inline-block");
+                    liveMatch.append(matchPart, matchScore, timeLeft).css({ "float": "left", "padding": "20px" }).addClass("live-match");
                     $("#live-scores").append(liveMatch);
                 }
             }
         });
     }
-    function playerSalary() {
-         //Calls the sportDB api to get all players by team
-         var queryURL10 = "https://www.thesportsdb.com/api/v1/json/4013017/lookup_all_players.php?id=133604"
-         $.ajax({
-             url: queryURL10,
-             method: "GET"
-         }).then(function (response10) {
-          
+
+    var mychart 
+
+    function playerSalary(teamID,teamName) {
+        //Calls the sportDB api to get all players by team
+        var queryURL10 = "https://www.thesportsdb.com/api/v1/json/4013017/lookup_all_players.php?id=" + teamID
+        $.ajax({
+            url: queryURL10,
+            method: "GET"
+        }).then(function (response10) {
+            console.log(response10)
             var playerNameArray = [];
             var playerWageArray = [];
-for (k=0; k<response10.player.length; k++){
-    var playerName = response10.player[k].strPlayer;
-    
-    playerNameArray.push(playerName);
-    
-    var playerWage = response10.player[k].strWage.split('£',2);
-        
-        if (playerWage.length >1){
-            var playerWageSplit = playerWage[1];
-     
- var playerWageSplitToNumber = playerWageSplit.split(' ',1);
-  var playerWageSplitToNumberNoCommas = parseFloat( playerWageSplitToNumber[0].replace(",",""));
-  console.log(playerWageSplitToNumberNoCommas);
+            for (k = 0; k < response10.player.length; k++) {
+                var playerName = response10.player[k].strPlayer;
 
- playerWageArray.push(playerWageSplitToNumberNoCommas);
+                playerNameArray.push(playerName);
 
-        }
-        else {var playerWageSplitToNumber = 0;
+                var playerWage = response10.player[k].strWage.split('£', 2);
 
-        playerWageArray.push(playerWageSplitToNumber);};
+                if (playerWage.length > 1) {
+                    var playerWageSplit = playerWage[1];
+                    var playerWageSplitToNumber = playerWageSplit.split(' ', 1);
+                    var playerWageSplitToNumberNoCommas = parseFloat(playerWageSplitToNumber[0].replace(",", ""));
+                    console.log(playerWageSplitToNumberNoCommas);
+                    playerWageArray.push(playerWageSplitToNumberNoCommas);
 
- 
+                }
+                else {
+                    var playerWageSplitToNumber = 0;
+
+                    playerWageArray.push(playerWageSplitToNumber);
+                };
 
 
-}
-console.log(playerNameArray);
-console.log(playerWageArray);
 
-new Chart(document.getElementById("bar-chart-horizontal"), {
-    type: 'horizontalBar',
-    data: {
-      labels: playerNameArray,
-      datasets: [
-        {
-          label: "Salary (£,000)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#fc9003", "#D2B4DE", "#03fc07",
-          "#943126", "#B9770E" , "#D35400" , "#2C3E50", "#F7DC6F", "#D4EFDF", "#03fc73", "#1c03fc", "#fc0339",
-           "#f4fc03", "#a503fc",  "#fc03c6", "#03c2fc", "#b103fc", "#fc9d03", "#ecfc03", "#2803fc"  ],
-          data: playerWageArray,
-        }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Team Player Wages for 2019-2020 Season'
-      }
+
+            }
+            console.log(playerNameArray);
+            console.log(playerWageArray);
+            if(mychart){
+                mychart.destroy();
+            }
+
+
+             mychart = new Chart(document.getElementById("bar-chart-horizontal"), {
+                type: 'horizontalBar',
+                data: {
+                    labels: playerNameArray,
+                    datasets: [
+                        {
+                            label: "Salary (£,000)",
+                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#fc9003", "#D2B4DE", "#03fc07",
+                                "#943126", "#B9770E", "#D35400", "#2C3E50", "#F7DC6F", "#D4EFDF", "#03fc73", "#1c03fc", "#fc0339",
+                                "#f4fc03", "#a503fc", "#fc03c6", "#03c2fc", "#b103fc", "#fc9d03", "#ecfc03", "#2803fc"],
+                            data: playerWageArray,
+                        }
+                    ]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: teamName + ' Team Player Wages for 2019-2020 Season'
+                    }
+                }
+            });
+            chartCount++;
+
+        });
     }
-});
-             
-             
-         });
-    }
-    playerSalary();
+    
 
 
     //This will empty the historical results div and make another call for the last 5 match results for the chosen team
     $("#team-select").on('change', function () {
+        $("#bar-chart-horizontal").empty();
         $("#hist-results").empty();
         $("#title-high").empty();
         var getValue = $(this).find('option:selected').attr('id');
         var teamValue = $(this).find('option:selected').text();
         teamResults(getValue);
         teamHighlights(teamValue);
-
-
-
-
+        playerSalary(getValue,teamValue);
 
     });
 
 
-    
-    function locateWeather(){
+
+    function locateWeather() {
 
         $("#weather-info").empty();
         $("#weather-icon").empty();
@@ -405,63 +412,63 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
         $.ajax({
             url: queryURL8,
             method: "GET"
-        }) .then(function(response) {
+        }).then(function (response) {
             var queryURL9 = "https://dataservice.accuweather.com/forecasts/v1/daily/1day/" + response[0].Key + "?apikey=HttSJfsjnPLSqcMJkfz97hZrKXcNXMHH&details=true&metric=true";
             $.ajax({
                 url: queryURL9,
                 method: "GET"
-            }) .then(function(weather) {
+            }).then(function (weather) {
                 console.log(weather);
                 var weatherInfo = $("<div>").addClass("weather")
-                var temp = $("<div>").text("High / Low: "  + (parseInt(weather.DailyForecasts[0].Temperature.Maximum.Value)*1.8 +32).toFixed(0) + " F" + "       " + (parseInt(weather.DailyForecasts[0].Temperature.Minimum.Value)*1.8 +32).toFixed(0)+" F").addClass("weather-item");
+                var temp = $("<div>").text("High / Low: " + (parseInt(weather.DailyForecasts[0].Temperature.Maximum.Value) * 1.8 + 32).toFixed(0) + " F" + "       " + (parseInt(weather.DailyForecasts[0].Temperature.Minimum.Value) * 1.8 + 32).toFixed(0) + " F").addClass("weather-item");
                 var temp2 = $("<div>").text(weather.Headline.Text).addClass("weather-item");
                 weatherInfo.append(temp);
                 weatherInfo.append(temp2);
                 $("#weather-info").append(weatherInfo);
                 var currentWeather = weather.Headline.Category;
-                var iconSelect; 
+                var iconSelect;
                 var iconColor;
-                switch(currentWeather){
+                switch (currentWeather) {
 
                     case "snow/rain":
                         iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
                         iconColor = "lightblue"
-                    break;
+                        break;
                     case "snow/ice":
-                            iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
-                            iconColor = "lightblue"
+                        iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
+                        iconColor = "lightblue"
                         break;
                     case "cooler":
                         iconSelect = "<i class='fas fa-temperature-low fa-6x'></i>"
                         iconColor = "lightblue"
-                    break;
+                        break;
                     case "rain":
                         iconSelect = "<i class='fas fa-cloud-rain fa-6x'></i>"
                         iconColor = "grey"
-                    break;
+                        break;
                     case "":
                         iconSelect = "<i class='fas fa-sun fa-6x'></i>"
                         iconColor = "orange"
-                    break;
+                        break;
                     case "thunderstorm":
                         iconSelect = "<i class='fas fa-poo-storm fa-6x'></i>"
                         iconColor = "orange"
-                    break;
+                        break;
                     case "snow":
                         iconSelect = "<i class='fas fa-snowflake fa-6x' color='blue'></i>"
                         iconColor = "lightblue"
-                    break;
+                        break;
                     case "wind":
                         iconSelect = "<i class='fas fa-wind fa-6x' color='black'></i>"
                         iconColor = "grey"
-                    break;
+                        break;
 
                 }
 
-                var weatherIcon = $("<div>").html(iconSelect).addClass("weather-icon-sun").css("color",iconColor);
+                var weatherIcon = $("<div>").html(iconSelect).addClass("weather-icon-sun").css("color", iconColor);
                 $("#weather-icon").append(weatherIcon);
 
-                var sunRise =$("<div>").text("Sun Rise: " + moment(weather.DailyForecasts[0].Sun.Rise).format("hh:mm a")).addClass("weather-item");
+                var sunRise = $("<div>").text("Sun Rise: " + moment(weather.DailyForecasts[0].Sun.Rise).format("hh:mm a")).addClass("weather-item");
                 var sunSet = $("<div>").text("Sun Set: " + moment(weather.DailyForecasts[0].Sun.Set).format("hh:mm a")).addClass("weather-item");
 
                 $("#weather-info").append(sunRise);
@@ -478,6 +485,7 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
     locateWeather();
     teamResults("133604");
     teamHighlights("Arsenal")
+    playerSalary("133604","Arsenal");
 
     //Mike End 
 
@@ -492,15 +500,15 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
 
     // Helper functions
     function focusWaiter(element) {
-        setTimeout(function() {
+        setTimeout(function () {
             $(element).focus();
         }, 500);
     }
     // Wait for input to focus on
-    $("#login-button").on("click", function(){
+    $("#login-button").on("click", function () {
         focusWaiter('#userInputEmail');
     });
-    $("#new-user-button").on("click", function(){
+    $("#new-user-button").on("click", function () {
         focusWaiter('#newUserInputFirstNameA');
     });
 
