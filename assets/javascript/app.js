@@ -34,8 +34,9 @@ $(document).ready(function () {
     //listen for auth changes (user login/logout)
 
     auth.onAuthStateChanged(user => {
+       
         if (user) {
-            console.log(user);
+            console.log('THIS:', user);
 
             $("#btn-sub-msg").show();
             $("#chat-content").css("background-color", "white")
@@ -80,6 +81,7 @@ $(document).ready(function () {
         firebase.auth().signInWithEmailAndPassword(userEmailForLogin, userPasswordForLogin).catch(function (error) {
             // Handle Errors here.
             alert("Either the email or the password associated with this email is incorrect - Please login again.");
+
         });
 
 
@@ -97,7 +99,7 @@ $(document).ready(function () {
         $("#user-logged-in").empty("");
         auth.signOut().then(() => {
             $("#chat-content").empty();
-            alert("you have been logged out")
+           
             console.log("user logged out");
         });
     })
@@ -105,6 +107,7 @@ $(document).ready(function () {
     //new user login form
     $("#newUserInputForm").submit(function (event) {
         event.preventDefault();
+
 
         var newUserFirstNameSubmitted = $("#newUserInputFirstNameA").val().trim();
 
@@ -144,7 +147,12 @@ $(document).ready(function () {
     // Capture Button Click for adding user message
     $("#btn-sub-msg").on("click", function (event) {
         var user = firebase.auth().currentUser;
-        userMessage = user.displayName + " : " + $("#userMessage1").val().trim();
+        var messageDate = moment().format("MMM Do")
+        var messageTime = moment().format("hh:mm a");
+        console.log(messageTime);
+        console.log(messageDate);
+
+        userMessage = user.displayName + " (" + messageDate + " " + messageTime +")  " + " : " + $("#userMessage1").val().trim();
 
         //Code for the push to firebase database
         database.ref().push({
@@ -345,9 +353,6 @@ $(document).ready(function () {
 
                     playerWageArray.push(playerWageSplitToNumber);
                 };
-
-
-
 
             }
             console.log(playerNameArray);
