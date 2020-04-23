@@ -1,4 +1,4 @@
-![site header](readImages/pageHeader.png) 
+![site header](/readImages/pageHeader.png) 
 
 # **Premier League Fan Zone**  
 
@@ -21,6 +21,6 @@
     * Accuweather API for global weather statistics
 
 
-![Stadium](readImages/stadium.png)
+![Stadium](/readImages/stadium.png)
 
 ### [Deployed Site](https://mikelang25.github.io/premierLeagueFanzone/)
