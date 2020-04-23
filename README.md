@@ -1,32 +1,26 @@
-# Project_1
-Premiere League Fan Zone
- Application Developers: Mike Lang, Alex Fernandez, Doug Mueller. This is an application developed for the English Premiere League fan with updating information on all 20 of the premiere league teams.
-Framework:
-HTML 5 frame
-Bootstrap for front end framework
-- specifically utilizing modals for user defined input
--drop down menus
--navigation buttons
-Google fonts and font awesome for styling, including  styled icons
-Javascript as our client-side scripting language 
-Javascript libraries:
-jquery  for simplifying creation and navigation of the app
-Moment.js - for adding global timezone access
-Graph.js for data generated changes
+![site header](readImages/pageHeader.png) 
 
-API’s
-Utilized 8 ajax calls to the 
-SportsDB API for:
- real time premier league statistics
-Live game feeds
-Upcoming league games
-User selected favorite team details
+# **Premier League Fan Zone**  
 
-Accuweather API for global weather statistics
-
-BackEnd
-Utilized the firebase real-time database to store and sync user generated data in real time
-In addition to using github pages, we also utilized firebase hosting to host our app, adding ease of use and integration with firebase database, including user authorization with email and password.
+ Application Developers: Mike Lang, Alex Fernandez, Doug Mueller. 
+ 
+ This is an application developed for the English Premiere League fan with updating information on all 20 of the premiere league teams.
+ Users are able to view the current standings, upcoming fixtures, a look into the offical twitter account of the Premier League, and participate in a message board of all users that have ccounts. You can also select your favorite team to get a glimpse of their current form, some video highlights of a recent match, and player salary information if available. 
 
 
-![main page slide]("assets/images/Premiere League Fan Zone Powerpoint.png")
+* Technologies Used
+    * Bootstrap for the container system. Utilized their modals for user input and their navigation bar. 
+    * Google fonts and font awesome for styling, including styled icons
+    * jQuery was used for page/content manipulation
+    * Moment.js used for adding global timezone access
+    * Graph.js used for displaying player salaries
+    * Firebase use to store message board content and for our user authentication
+
+* API’s
+    * SportsDB API: primary API used for grabbing all information related to the league, teams, and players (9 different parts of the API hit throughout the project)
+    * Accuweather API for global weather statistics
+
+
+![Stadium](readImages/stadium.png)
+
+### [Deployed Site](https://mikelang25.github.io/premierLeagueFanzone/)
